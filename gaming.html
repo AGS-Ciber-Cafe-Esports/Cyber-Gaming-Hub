@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#05070b">
+  <title>Cyber & Gaming Hub | Neon Arena</title>
+  <link rel="stylesheet" href="gaming.css">
+</head>
+<body>
+  <div class="background-grid"></div><div class="background-orb orb-one"></div><div class="background-orb orb-two"></div>
+  <header class="header">
+    <a href="../index.html" class="logo">NEON <span>ARENA</span></a>
+    <nav class="navigation" aria-label="Navegación principal">
+      <a href="../index.html">INICIO</a>
+      <a href="../Cafe GAming/cafe.html">CAFÉ & SNACKS</a>
+      <a href="../Gaming store/index.html" class="active">CYBER & GAMING</a>
+    </nav>
+    <button class="my-reservations-button" id="myReservationsButton"><span class="ticket-icon">🎟</span><span>MIS RESERVAS</span><b id="reservationBadge">0</b></button>
+  </header>
+
+  <main>
+    <section class="gaming-hero">
+      <div class="hero-content">
+        <div class="hero-copy">
+          <span class="section-label">⚡ NEON ARENA EXPERIENCE</span>
+          <h1>CYBER & <span>GAMING HUB</span></h1>
+          <p>Elegí tu estación, reservá tu horario y viví una experiencia gaming de otro nivel. Equipos de alto rendimiento, consolas de última generación y reservas simples.</p>
+          <div class="hero-actions"><a href="#stations" class="primary-link">EXPLORAR ESTACIONES <span>→</span></a><button class="secondary-link" id="heroReservationsButton">VER MIS RESERVAS</button></div>
+        </div>
+        <div class="hero-panel"><div class="live-dot"></div><span>ARENA ONLINE</span><strong>READY<br>PLAYER ONE</strong><small>Reservas digitales · 10:00 — 00:00</small></div>
+      </div>
+    </section>
+
+    <section class="stats-section" aria-label="Estadísticas">
+      <div class="stat-card"><span>🟢</span><div><strong id="availableCount">0</strong><small>PUESTOS DISPONIBLES</small></div></div>
+      <div class="stat-card"><span>🎮</span><div><strong id="totalStations">0</strong><small>ESTACIONES GAMING</small></div></div>
+      <div class="stat-card"><span>⏱</span><div><strong>14 HS</strong><small>MÁXIMO POR RESERVA</small></div></div>
+      <div class="stat-card"><span>📅</span><div><strong>+1 DÍA</strong><small>ANTICIPACIÓN MÍNIMA</small></div></div>
+    </section>
+
+    <section class="stations-section" id="stations">
+      <div class="section-header"><div><span class="section-label">ELEGÍ TU EXPERIENCIA</span><h2>PUESTOS <span>DISPONIBLES</span></h2><p>Filtrá por plataforma y encontrá la estación ideal para tu próxima sesión.</p></div><div class="stations-info">📅 Las reservas deben realizarse con al menos <strong>1 día de anticipación.</strong><br>🕛 Horario de funcionamiento: <strong>10:00 a 00:00.</strong></div></div>
+      <div class="station-toolbar"><div class="filters" id="stationFilters"><button class="filter active" data-filter="all">TODOS</button><button class="filter" data-filter="PC GAMING">PC GAMING</button><button class="filter" data-filter="PLAYSTATION">PLAYSTATION</button><button class="filter" data-filter="XBOX">XBOX</button></div><div class="availability-legend"><span><i class="available"></i> DISPONIBLE</span><span><i class="occupied"></i> OCUPADO</span></div></div>
+      <div class="stations-grid" id="stationsGrid"></div>
+    </section>
+  </main>
+
+  <!-- MODAL RESERVA -->
+  <div class="modal station-modal" id="stationModal" aria-hidden="true"><div class="modal-backdrop" data-close="stationModal"></div><div class="modal-content station-content" role="dialog" aria-modal="true" aria-labelledby="stationModalTitle">
+    <button class="modal-close" data-close="stationModal" aria-label="Cerrar">×</button>
+    <div id="stationDetails"></div>
+    <div class="modal-divider"></div>
+    <div class="reservation-grid">
+      <div class="reservation-field"><label for="reservationDate">📅 FECHA DE RESERVA</label><input type="date" id="reservationDate"><small>Elegí desde mañana en adelante.</small></div>
+      <div class="reservation-field"><label for="reservationTime">🕐 HORA DE INICIO</label><select id="reservationTime"><option value="">Seleccionar horario</option></select><small id="timeHint">Seleccioná una fecha para ver los horarios.</small></div>
+    </div>
+    <div class="reservation-field"><div class="field-heading"><label>⏱ DURACIÓN</label><small id="maxHoursHint">Máximo 14 horas.</small></div><div class="hours-selector"><button id="decreaseHours" aria-label="Reducir horas">−</button><div class="hours-display"><strong id="hoursValue">1</strong><span id="hoursLabel">HORA</span></div><button id="increaseHours" aria-label="Aumentar horas">+</button></div></div>
+    <div class="validation-message" id="validationMessage" role="alert"></div>
+    <div class="reservation-summary"><div><span>FINALIZA</span><strong id="reservationEndTime">--:--</strong></div><div><span>DURACIÓN</span><strong id="reservationDuration">1 HORA</strong></div><div><span>PRECIO / HORA</span><strong id="reservationPrice">$0</strong></div><div><span>TOTAL</span><strong id="reservationTotal">$0</strong></div></div>
+    <button class="reserve-station-button" id="reserveStationButton"><span>CONFIRMAR RESERVA</span><b id="reserveButtonPrice">$0</b><span>→</span></button>
+  </div></div>
+
+  <!-- MODAL ÉXITO -->
+  <div class="modal success-modal" id="successModal" aria-hidden="true"><div class="modal-backdrop" data-close="successModal"></div><div class="modal-content success-content"><div class="success-icon">✓</div><span>RESERVA CONFIRMADA</span><h2>¡TODO <strong>LISTO!</strong></h2><p>Tu estación fue reservada correctamente. Guardá tu código para consultar o cancelar la reserva.</p><div class="reservation-code-box"><small>CÓDIGO DE RESERVA</small><strong id="successReservationCode">NA-000000</strong></div><div class="success-details" id="successDetails"></div><button class="success-button" id="successButton">ENTENDIDO</button></div></div>
+
+  <!-- MODAL MIS RESERVAS -->
+  <div class="modal reservations-modal" id="reservationsModal" aria-hidden="true"><div class="modal-backdrop" data-close="reservationsModal"></div><div class="modal-content reservations-content"><button class="modal-close" data-close="reservationsModal" aria-label="Cerrar">×</button><span class="section-label">TU ACTIVIDAD</span><h2>MIS <span>RESERVAS</span></h2><p>Consultá y administrá tus reservas guardadas en este dispositivo.</p><div id="reservationsList" class="reservations-list"></div></div></div>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="gaming.js"></script>
+</body></html>
